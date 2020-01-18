@@ -42,7 +42,6 @@ void hashes(int c, int hc)
     //base condition
     if (hc == c)
     {
-        printf("  ");
         return;
     }
     else
@@ -59,6 +58,7 @@ void draw(int x)
     {
         spaces(x, i, count);   
         hashes(i, count);
+        printf("  ");
         hashes(i, count);
         printf("\n");
         
