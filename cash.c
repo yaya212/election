@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<cs50.h>
 #include<math.h>
-//function responsible for calculating the least number of coins
+//function responsible for calculating the least number of coins using recursion
 void calc_owed(int c);
 int main(void)
 {
