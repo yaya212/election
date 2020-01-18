@@ -13,31 +13,34 @@ int main(void)
     do
     {
         h = get_int("Enter the height of the pyramid:\n");
-    }while(h > 8 || h < 1);
+    }
+    while (h > 8 || h < 1);
     draw(h);
 }
 //function responsible for printing spaces performed using a recursion
 // s holds the height of pyramid
 // c holds the current level of pyramid
 // sc is the spaces counter
-void spaces(int s,int c,int sc)
+void spaces(int s, int c, int sc)
 {
     //base condition
-    if(sc == (s - c))
-        return;
+    if (sc == (s - c))
+    {
+        return;   
+    }
     else
     {
         printf(" ");
-        spaces(s,c,++sc);
+        spaces(s, c, ++sc);
     }
 }
 //function responsible for printing hashes using recursion
 //c holds the current level of pyramid
 //hc is the hashes counter
-void hashes(int c,int hc)
+void hashes(int c, int hc)
 {
     //base condition
-    if(hc == c)
+    if (hc == c)
     {
         printf("\n");
         return;
@@ -45,16 +48,16 @@ void hashes(int c,int hc)
     else
     {
         printf("#");
-        hashes(c,++hc);
+        hashes(c, ++hc);
     }
 }
 // x holds the height of pyramid
 void draw(int x)
 {
     int count = 0;//count is a counter that is passed to the spaces function and the hashes function as well
-    for(int i = 1;i <= x;i++)
+    for (int i = 1; i <= x; i++)
     {
-         spaces(x,i,count);   
-         hashes(i,count);
+        spaces(x, i, count);   
+        hashes(i, count);
     }
 }
