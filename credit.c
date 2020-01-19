@@ -1,72 +1,70 @@
+//this program checks if a credit card is valid according to Luhn's algorithm
 #include<stdio.h>
 #include<cs50.h>
 #include<math.h>
+//function responsible for validation
 void validate(long c);
 int main(void)
 {
-    //string s;
-    long cn;
+    long cn;//cn holds the credit card number 
     cn = get_long("Enter the credit card number:\n");
-    /*= (string)cn;
-    printf("the credit card number is %s\n",s);*/
     validate(cn);
 }
-int p = 0;
-int s = 0;
-int ftd = 0;
+int p = 0;//p holds the current position of digit in the credit card
+int s = 0;//s holds the total sum
+int ftd = 0;//ftd holds the first two digits in the credit card number
 void algo(long c)
 {
-    if(c < 100 && c > 9 )
+    //this condition is used to extract the first two digits in the credit card number
+    if (c < 100 && c > 9)
     {
         ftd = c;
     }
-    if(p % 2 != 0)
+    //checking if the it is the other digit starting from the end 
+    if (p % 2 != 0)
     {
-        int temp = c % 10;
-        printf("temp is %d\n",temp);
+        int temp = c % 10;//temp hold the this other digit in order to process it 
+        //checking if this other digit after multiplying by 2 gives a 2 digit number is so we break this number into its 2 digits and           add them up else we just add this other digit after multiplying by 2
         if ((temp * 2) > 9)
         {
             temp *= 2;
-            printf("new temp is %d\n",temp);
-            s += (temp % 10) + (temp/10);
-            printf("sum1 is %d\n",s);
+            s += (temp % 10) + (temp / 10);
         }
         else
         {
             s += temp * 2;
-            printf("sum2 is %d\n",s);
         }
         p++;
-        if(c < 10)
+        //base condition
+        if (c < 10)
         {
             return;
         }        
-        algo(c/10);
+        algo(c / 10);
     }
-    else if(p % 2 == 0)
+    else if (p % 2 == 0)
     {
         s += (c % 10);
-        printf("sum = %d\n", s);
         p++;
-        if(c < 10)
+        //base condition
+        if (c < 10)
         {
             return;
         }        
-        algo(c/10);
+        algo(c / 10);
     }
         
 }
 void validate(long x)
 {
-    algo(x);
-    printf("length is %d\n",p);
-    printf("ftd is %d\n",ftd);
-    if(s % 10 == 0)
+    algo(x);//function responsible for doing the summation and getting the total according to Luhn's algorithm
+    //afte getting the total we check according to the validation of each type of credit card 
+    if (s % 10 == 0)
     {
         switch (p)
         {
             case 13: 
-                if((ftd/10) == 4)
+                if ((ftd / 10) == 4)
                 {
                     printf("VISA\n");
                 }
@@ -76,7 +74,7 @@ void validate(long x)
                 }
                 break;
             case 15: 
-                if(ftd == 34 || ftd == 37)
+                if (ftd == 34 || ftd == 37)
                 {
                     printf("AMEX\n");
                 }
@@ -86,11 +84,11 @@ void validate(long x)
                 }
                 break;
             case 16:
-                if((ftd/10) == 4)
+                if ((ftd / 10) == 4)
                 {
                     printf("VISA\n");
                 }
-                else if(ftd >= 51 && ftd <= 55)
+                else if (ftd >= 51 && ftd <= 55)
                 {
                     printf("MASTERCARD\n");
                 }
