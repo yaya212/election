@@ -18,7 +18,7 @@ int main(int argc, string argv[])
         string k = argv[argc - 1];
         int l = strlen(k);
         int f = check(k,l);
-        if(f == 1)
+        if(f == 0)
         {
             int d = atoi(k);
             string p = get_string("plaintext: ");
@@ -39,17 +39,17 @@ int check(string x, int y)
 {
     if(x[0] == '-')
     {
-        return 0;
+        return 1;
     }
     if(i == y)
     {
-        return 1;
+        return 0;
     }
     else
     {
         if(!isdigit(x[i]))
         {
-            return 0;
+            return 1;
         }
         else
         {
@@ -64,7 +64,8 @@ void cipher(string p, char c[], int d, int l)
     if(j == l)
     {
         c[j] = '\0';
-        printf("%s\n", c);
+        //printf("%s\n", c);
+        printf("\n");
         return;
     }
     else
@@ -74,10 +75,12 @@ void cipher(string p, char c[], int d, int l)
             if(p[j] >= 'A' && p[j] <= 'Z')
             {
                 c[j] = 'A' + ((p[j] - 'A' + d) % 26);
+                printf("%c", c[j]);
             }
             else if(p[j] >= 'a' && p[j] <= 'z')
             {
                 c[j] = 'a' + ((p[j] - 'a' + d) % 26);
+                printf("%c", c[j]);
             }
         }
         else
