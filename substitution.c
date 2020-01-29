@@ -39,9 +39,8 @@ int main(int argc, string argv[])
         }
     }
 }
-int i = 0;
-int j = 1;
-int r = 2;
+int i = 1;
+int j = 0;
 int check(string k, int l)
 {
     if(i == l)
@@ -50,10 +49,8 @@ int check(string k, int l)
     }
     if(j == i)
     {
-        if((tolower(k[i]) != k[j]) && (toupper(k[i]) != k[j]))
-            return 1;
-        else
-            return 0;
+            i++;
+            j = 0;
     }
     else
     {
@@ -66,24 +63,16 @@ int check(string k, int l)
             if((tolower(k[i]) != k[j]) && (toupper(k[i]) != k[j]))
             {
                 j++;
-                return check(k, l);
-                if(r == 1)
-                {
-                    i++;
-                    j = 0;
-                    return check(k, l);
-                }
-                else if(r == 0)
-                {
-                    return 0;
-                }
+                check(k, l);
             }
             else
             {
                 return 0;
             }
         }
+
     }
+    return check(k, l);
 }
 int h = 0, m = 0;
 void cipher(string p, char c[], int l, string k)
