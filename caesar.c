@@ -18,7 +18,7 @@ int main(int argc, string argv[])
         string k = argv[argc - 1];
         int l = strlen(k);
         int f = check(k,l);
-        if(f == 0)
+        if(f == 1)
         {
             int d = atoi(k);
             string p = get_string("plaintext: ");
@@ -26,10 +26,12 @@ int main(int argc, string argv[])
             char c[l + 1];
             printf("ciphertext: ");
             cipher(p , c, d, l);
+            return 0;
         }
         else
         {
             printf("Usage: ./caesar key\n");
+            return 1;
         }
 
     }
@@ -39,17 +41,17 @@ int check(string x, int y)
 {
     if(x[0] == '-')
     {
-        return 1;
+        return 0;
     }
     if(i == y)
     {
-        return 0;
+        return 1;
     }
     else
     {
         if(!isdigit(x[i]))
         {
-            return 1;
+            return 0;
         }
         else
         {
