@@ -30,7 +30,7 @@ int main(int argc, string argv[])
             l = strlen(p);//l now holds the length of the plaintext
             char c[l + 1];//c is an array of characters that holds the ciphertext
             printf("ciphertext: ");
-            cipher(p , c, d, l);
+            cipher(p, c, d, l);
             return 0;
         }
         //this condition executes if the key is validated and not in the correct format
@@ -42,7 +42,7 @@ int main(int argc, string argv[])
 
     }
 }
-int i = 0;
+int i = 0;//i is used to index through character in key string
 //x holds the string key
 //y holds the lengt of string key
 int check(string x, int y)
@@ -74,7 +74,7 @@ int check(string x, int y)
         }
     }
 }
-int j = 0;
+int j = 0;//j is used to index through characters in the plaintext and ciphertext
 //p holds the plaintext
 //c is the array of characters that hold the ciphertext
 //d is the key after being converted into an integer
