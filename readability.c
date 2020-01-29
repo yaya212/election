@@ -3,6 +3,7 @@
 #include<cs50.h>
 #include<ctype.h>
 #include<math.h>
+#include<string.h>
 //function responsible for counting the number of letters
 int count_letter(string x, int y);
 //function responsible for counting the number of words
@@ -14,12 +15,7 @@ void get_grade(int k, int l, int n);
 int main(void)
 {
     string s = get_string("Text: ");//s holds the input string
-    int l = 0;//l is used to count determine the length of that string
-    //loop responsible for counting the number of characters in the string s given that the last character in any string is the '\0'
-    while (s[l] != '\0')
-    {
-        l++;
-    }
+    int l = strlen(s);//l holds the length of string
     int letter = count_letter(s, l);
     int words = count_word(s, l);
     int sentence = count_sentence(s, l);
