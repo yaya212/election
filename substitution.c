@@ -41,15 +41,19 @@ int main(int argc, string argv[])
 }
 int i = 0;
 int j = 1;
+int r = 2;
 int check(string k, int l)
 {
     if(i == l)
     {
         return 1;
     }
-    if(j == l)
+    if(j == i)
     {
-        return 1;
+        if((tolower(k[i]) != k[j]) && (toupper(k[i]) != k[j]))
+            return 1;
+        else
+            return 0;
     }
     else
     {
@@ -63,14 +67,21 @@ int check(string k, int l)
             {
                 j++;
                 return check(k, l);
+                if(r == 1)
+                {
+                    i++;
+                    j = 0;
+                    return check(k, l);
+                }
+                else if(r == 0)
+                {
+                    return 0;
+                }
             }
             else
             {
                 return 0;
             }
-            i++;
-            j = 0;
-            return check(k, l);
         }
     }
 }
