@@ -29,11 +29,13 @@ int main(int argc, string argv[])
             else
             {
                 printf("Key must contain 26 unique alphabetical characters.\n");
+                return 1;
             }
         }
         else
         {
             printf("Key must contain 26 characters.\n");
+            return 1;
         }
     }
 }
