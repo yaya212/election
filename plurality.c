@@ -20,8 +20,8 @@ candidate candidates[MAX];
 int candidate_count;
 
 // Function prototypes
-bool vote(string name, int s);
-void print_winner(int max);
+bool vote(string name);
+void print_winner(void);
 
 int main(int argc, string argv[])
 {
@@ -34,7 +34,6 @@ int main(int argc, string argv[])
 
     // Populate array of candidates
     candidate_count = argc - 1;
-    printf("Candidate count is %d\n", candidate_count);
     if (candidate_count > MAX)
     {
         printf("Maximum number of candidates is %i\n", MAX);
@@ -52,72 +51,50 @@ int main(int argc, string argv[])
     for (int i = 0; i < voter_count; i++)
     {
         string name = get_string("Vote: ");
-        int s = 0;
+
         // Check for invalid vote
-        if (vote(name, s) == false)
+        if (!vote(name))
         {
-            printf("Invalid vote when i = %d\n", i);
+            printf("Invalid vote.\n");
         }
-        //printf("Candidate %s at index %d\n", candidates[i].name, i);
     }
-    int max = 0;
+
     // Display winner of election
-    print_winner(max);
+    print_winner();
 }
 
 // Update vote totals given a new vote
-bool vote(string name, int s)
+bool vote(string name)
 {
-    if(s == candidate_count)
+    for(int i = 0; i < candidate_count; i++)
     {
-        return false;
-        //printf("Candidate %s is not found!!!\n",name);
-    }
-    else
-    {
-        if(!(strcmp(candidates[s].name, name)))
+        if(!(strcmp(name, candidates[i].name)))
         {
-            ++(candidates[s].votes);
-            //printf("Candidate %s has %d votes\n",candidates[s].name,candidates[s].votes);
+            candidates[i].votes++;
             return true;
         }
-        else
-        {
-            //printf("Candidate %s is not found!!!\n",name);
-            s++;
-            return vote(name, s);
-        }
     }
-    //return true;
+    // TODO
+    return false;
 }
-int j = 0;
+
 // Print the winner (or winners) of the election
-void print_winner(int max)
+void print_winner(void)
 {
-    if(j == candidate_count)
+    int max = 0;
+    for(int i = 0; i < candidate_count; i++)
     {
-        printf("%s\n", candidates[max].name);
-        return;
-    }
-    else
-    {
-        if(candidates[j].votes > candidates[max].votes)
+        if(candidates[i].votes > candidates[max].votes)
         {
-            max = j;
-            j++;
-            print_winner(max);
+            max = i;
         }
-        else if((candidates[j].votes == candidates[max].votes) && (j != max))
+        else if((candidates[i].votes == candidates[max].votes) && (i != max))
         {
-            printf("%s\n", candidates[j].name);
-            j++;
-            print_winner(max);
-        }
-        else
-        {
-            j++;
-            print_winner(max);
+            printf("%s\n", candidates[i].name);
         }
     }
+    printf("%s\n", candidates[max].name);
+    // TODO
+    return;
 }
 
