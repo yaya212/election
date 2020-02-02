@@ -129,9 +129,9 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        if(!strcmp(name,candidates[i].name))
+        if (!strcmp(name, candidates[i].name))
         {
             preferences[voter][rank] = i;
             return true;
@@ -144,11 +144,11 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    for(int i = 0;i < voter_count; i++)
+    for (int i = 0; i < voter_count; i++)
     {
-        for(int j = 0; j < candidate_count; j++)
+        for (int j = 0; j < candidate_count; j++)
         {
-            if(candidates[(preferences[i][j])].eliminated == false)
+            if (candidates[(preferences[i][j])].eliminated == false)
             {
                 candidates[(preferences[i][j])].votes ++;
                 break;
@@ -163,13 +163,13 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
             //printf("The percentage of votes is %d\n", (candidates[i].votes * 100) / voter_count);
             //return true;
-            if(candidates[i].votes * 100 / voter_count > 50)
+            if (candidates[i].votes * 100 / voter_count > 50)
             {
                 printf("%s\n", candidates[i].name);
                 return true;
@@ -184,11 +184,11 @@ bool print_winner(void)
 int find_min(void)
 {
     int min = 999;
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes < min)
+            if (candidates[i].votes < min)
             {
                 min = candidates[i].votes;
             }
@@ -202,11 +202,11 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes != min)
+            if (candidates[i].votes != min)
             {
                 return false;
             }
@@ -219,11 +219,11 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    for(int i = 0;i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes == min)
+            if (candidates[i].votes == min)
             {
                 candidates[i].eliminated = true;
             }
