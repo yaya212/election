@@ -26,7 +26,7 @@ void spaces(int s, int c, int sc)
     //base condition
     if (sc == (s - c))
     {
-        return;   
+        return;
     }
     else
     {
@@ -37,30 +37,41 @@ void spaces(int s, int c, int sc)
 //function responsible for printing hashes using recursion
 //c holds the current level of pyramid
 //hc is the hashes counter
-void hashes(int c, int hc)
+void hashes(int c, int hc, int rep)
 {
     //base condition
     if (hc == c)
     {
-        return;
+        rep++;
+        if (rep == 2)
+        {
+            printf("\n");
+            return;
+        }
+        else
+        {
+            printf("  ");
+            hashes(c, 0, rep);
+        }
     }
     else
     {
         printf("#");
-        hashes(c, ++hc);
+        hashes(c, ++hc, rep);
     }
 }
 // x holds the height of pyramid
 void draw(int x)
 {
     int count = 0;//count is a counter that is passed to the spaces function and the hashes function as well
+    int rep = 0;
     for (int i = 1; i <= x; i++)
     {
-        spaces(x, i, count);   
-        hashes(i, count);
-        printf("  ");
-        hashes(i, count);
-        printf("\n");
-        
+        spaces(x, i, count);
+        hashes(i, count, rep); //the hashes function is modified so we don't repeat its call.
+        //printf("  ");
+        //hashes(i, count);
+        //printf("\n");
+
     }
 }
