@@ -248,12 +248,11 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     int tmp = -1;
-    int flag = 0;
+    int flag;
     for(int i = 0; i < pair_count; i++)
     {
-        if(i == pair_count - 1)
-        {
-            for(int j = 0; j < pair_count - 1; j++)
+        flag = 0;
+            for(int j = 0; j < i; j++)
             {
                 if(pairs[j].loser < pairs[i].loser)
                 {
@@ -272,8 +271,6 @@ void lock_pairs(void)
             {
                 locked[pairs[i].winner][pairs[i].loser] = true;
             }
-        }
-        locked[pairs[i].winner][pairs[i].loser] = true;
     }
 
 //Testing the addition of edges worked well
