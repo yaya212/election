@@ -234,12 +234,12 @@ void sort_pairs(void)
     }
 
 //Testing the sorting of pair worked
-    // printf("The sorted pairs are:\n\n");
+    printf("The sorted pairs are:\n\n");
 
-    // for(int i = 0; i < pair_count; i++)
-    // {
-    //     printf("Pair[%i]:\nWinner: %d\nLoser: %d\n", i, pairs[i].winner, pairs[i].loser);
-    // }
+    for(int i = 0; i < pair_count; i++)
+    {
+        printf("Pair[%i]:\nWinner: %d\nLoser: %d\n", i, pairs[i].winner, pairs[i].loser);
+    }
     // TODO
     return;
 }
@@ -251,37 +251,35 @@ void lock_pairs(void)
     int flag;
     for(int i = 0; i < pair_count; i++)
     {
-        flag = 1;
-            for(int j = 0; j < i; j++)
-            {
-                if(pairs[j].loser < pairs[i].loser)
-                {
-                    if(pairs[j].loser != tmp)
-                    {
-                        tmp = pairs[j].loser;
-                        flag = 1;
-                    }
-                    else
-                    {
-                        flag = 0;
-                    }
-                }
-            }
-            if(flag == 1)
-            {
-                locked[pairs[i].winner][pairs[i].loser] = true;
-            }
+        flag = 0;
+        if(pairs[i].loser == pairs[i+1].loser)
+        {
+        /*if(pairs[j].loser != tmp)
+        {
+            tmp = pairs[j].loser;
+            flag = 1;
+        }
+        else
+        {
+            flag = 0;
+        }*/
+            flag = 1;
+        }
+        if(flag == 0)
+        {
+            locked[pairs[i].winner][pairs[i].loser] = true;
+        }
     }
 
 //Testing the addition of edges worked well
-    // for(int i = 0; i < candidate_count; i++)
-    // {
-    //     for(int j = 0; j< candidate_count; j++)
-    //     {
-    //         printf("locked[%d][%d] = %d\t", i, j, locked[i][j]);
-    //     }
-    // }
-    // printf("\n");
+    for(int i = 0; i < candidate_count; i++)
+    {
+        for(int j = 0; j< candidate_count; j++)
+        {
+            printf("locked[%d][%d] = %d\t", i, j, locked[i][j]);
+        }
+    }
+    printf("\n");
     // TODO
     return;
 }
