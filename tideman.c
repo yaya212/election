@@ -248,17 +248,20 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     int tmp = -1;
-    int flag;
+    int flag = 0;
     for(int i = 0; i < pair_count; i++)
     {
-        flag = 0;
-        if((pairs[i].loser == pairs[i+1].winner) && (pairs[i].winner == pairs[i+1].loser))
-        {
-            flag = 1;
-        }
         if(flag == 0)
         {
             locked[pairs[i].winner][pairs[i].loser] = true;
+        }
+        if(pairs[i].winner == pairs[i+1].loser)
+        {
+            flag = 1;
+        }
+        else
+        {
+            flag = 0;
         }
     }
 
