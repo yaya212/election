@@ -251,25 +251,29 @@ void lock_pairs(void)
     int flag = 0;
     for(int i = 0; i < pair_count; i++)
     {
-        for(int j = 0; j < i; j++)
+        if(i == pair_count - 1)
         {
-            if(pairs[j].loser < pairs[i].loser)
+            for(int j = 0; j < pair_count - 1; j++)
             {
-                if(pairs[j].loser != tmp)
+                if(pairs[j].loser < pairs[i].loser)
                 {
-                    tmp = pairs[j].loser;
-                    flag = 1;
-                }
-                else
-                {
-                    flag = 0;
+                    if(pairs[j].loser != tmp)
+                    {
+                        tmp = pairs[j].loser;
+                        flag = 1;
+                    }
+                    else
+                    {
+                        flag = 0;
+                    }
                 }
             }
+            if(flag == 0)
+            {
+                locked[pairs[i].winner][pairs[i].loser] = true;
+            }
         }
-        if(flag == 0)
-        {
-            locked[pairs[i].winner][pairs[i].loser] = true;
-        }
+        locked[pairs[i].winner][pairs[i].loser] = true;
     }
 
 //Testing the addition of edges worked well
