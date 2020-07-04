@@ -167,17 +167,37 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    for(int i = 0; i < pair_count - 1; i++)
-    {
-        if(preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[i + 1].winner][pairs[i + 1].loser])
-        {
-            int win = pairs[i].winner;
-            int loss = pairs[i].loser;
-            pairs[i].winner = pairs[i + 1].winner;
-            pairs[i].loser = pairs[i + 1].loser;
-            pairs[i + 1].winner = win;
-            pairs[i + 1].loser = loss;
-        }
+    // for(int i = 0; i < pair_count - 1; i++)
+    // {
+    //     if(preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[i + 1].winner][pairs[i + 1].loser])
+    //     {
+    //         int win = pairs[i].winner;
+    //         int loss = pairs[i].loser;
+    //         pairs[i].winner = pairs[i + 1].winner;
+    //         pairs[i].loser = pairs[i + 1].loser;
+    //         pairs[i + 1].winner = win;
+    //         pairs[i + 1].loser = loss;
+    //     }
+    // }
+
+   for(int i = 0; i < pair_count - 1; i++)
+   {
+      for(int j = i; j < pair_count; j++)
+      {
+         if(preferences[pairs[j].winner][pairs[j].loser] < preferences[pairs[j + 1].winner][pairs[j + 1].loser])
+         {
+            int win = pairs[j].winner;
+            int loss = pairs[j].loser;
+            pairs[j].winner = pairs[j + 1].winner;
+            pairs[j].loser = pairs[j + 1].loser;
+            pairs[j + 1].winner = win;
+            pairs[j + 1].loser = loss;
+            // printf(" => swapped [%d, %d]\n",list[j],list[j+1]);
+         }
+
+      }
+
+
     }
 
     // printf("AFTER SORTING:\n\n");
@@ -232,8 +252,8 @@ void lock_pairs(void)
 void print_winner(void)
 {
     int win;
-
-    for(int i = 0; i < pair_count; i++)
+    int i;
+    for(i = 0; i < pair_count; i++)
     {
         win = 1;
         for(int j = 0; j < candidate_count; j++)
@@ -245,8 +265,13 @@ void print_winner(void)
             }
         }
         if(win == 1)
+        {
             printf("%s\n", candidates[pairs[i].winner]);
+            return;
+        }
     }
+
+
     return;
 }
 
