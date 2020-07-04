@@ -182,7 +182,7 @@ void sort_pairs(void)
 
    for(int i = 0; i < pair_count - 1; i++)
    {
-      for(int j = i; j < pair_count; j++)
+      for(int j = i; j < pair_count - 1; j++)
       {
          if(preferences[pairs[j].winner][pairs[j].loser] < preferences[pairs[j + 1].winner][pairs[j + 1].loser])
          {
@@ -226,6 +226,7 @@ void lock_pairs(void)
                 if(locked[j][pairs[i].winner] == true)
                 {
                     flag = 1;
+                    //printf("The pair %d --> %d form a loop\n", pairs[i].winner, pairs[i].loser);
                     break;
                 }
 
