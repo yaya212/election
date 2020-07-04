@@ -232,8 +232,8 @@ void lock_pairs(void)
 void print_winner(void)
 {
     int win;
-    int i = 0;
-    for(; i < pair_count; i++)
+
+    for(int i = 0; i < pair_count; i++)
     {
         win = 1;
         for(int j = 0; j < candidate_count; j++)
@@ -245,11 +245,8 @@ void print_winner(void)
             }
         }
         if(win == 1)
-            goto winner;
+            printf("%s\n", candidates[pairs[i].winner]);
     }
     return;
-    winner:
-        printf("%s\n", candidates[pairs[i].winner]);
-        return;
 }
 
