@@ -212,10 +212,58 @@ void sort_pairs(void)
     return;
 }
 
+int p1;
+int p2;
+int index = 0;
+int l = 0;
+bool isCyclic(int x, int y)
+{
+    if(p2 == y)
+    {
+        return true;
+    }
+    if(index == 0)
+    {
+        p1 = x;
+        p2 = x;
+    }
+    if(locked[x][l] == true)
+    {
+        p2 = l;
+        l = 0;
+        index++;
+        return isCyclic(p2, y);
+    }
+    else
+    {
+        l++;
+        if(l == candidate_count)
+        {
+            return false;
+        }
+        return isCyclic(x, y);
+    }
+
+
+}
+
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    int flag;
+    for(int i = 0; i < pair_count; i++)
+    {
+        if(locked[pairs[i].loser][pairs[i].winner] == false)
+        {
+            if(!isCyclic(pairs[i].loser, pairs[i].winner))
+            {
+                locked[pairs[i].winner][pairs[i].loser] = true;
+            }
+        }
+
+
+    }
+
+    /*int flag;
     //locked[pairs[0].winner][pairs[0].loser] = true;
     for(int i = 0; i < pair_count; i++)
     {
@@ -243,7 +291,7 @@ void lock_pairs(void)
             {
                 locked[pairs[i].winner][pairs[i].loser] = true;
             }
-    }
+    }*/
 
     // for(int i = 1; i < pair_count - 1; i++)
     // {
