@@ -220,6 +220,11 @@ void lock_pairs(void)
     for(int i = 0; i < pair_count; i++)
     {
         flag = 0;
+        if(locked[pairs[i].loser][pairs[i].winner] == true)
+        {
+            flag = 1;
+            goto outer;
+        }
         for(int j = 0; j < candidate_count; j++)
         {
             if(locked[pairs[i].loser][j] == true)
@@ -227,7 +232,6 @@ void lock_pairs(void)
                 if(locked[j][pairs[i].winner] == true)
                 {
                     flag = 1;
-                    locked[pairs[i].winner][pairs[i].loser] = false;
                     //printf("The pair %d --> %d form a loop\n", pairs[i].winner, pairs[i].loser);
                     goto outer;
                 }
@@ -279,12 +283,12 @@ void print_winner(void)
 {
     int win;
     int win_index;
-    for(int i = 0; i < pair_count; i++)
+    for(int i = 0; i < candidate_count; i++)
     {
         win = 1;
-        for(int j = 0; j < candidate_count; j++)
+        for(int j = 0; i < candidate_count; j++)
         {
-            if(locked[j][pairs[i].winner] == true)
+            if(locked[j][i] == true)
             {
                 win = 0;
                 break;
@@ -293,10 +297,27 @@ void print_winner(void)
         if(win == 1)
         {
             win_index = i;
+            goto found;
         }
+        // win = 1;
+        // for(int j = 0; j < candidate_count; j++)
+        // {
+        //     if(locked[j][pairs[i].winner] == true)
+        //     {
+        //         win = 0;
+        //         break;
+        //     }
+        // }
+        // if(win == 1)
+        // {
+        //     win_index = i;
+        // }
     }
-
-    printf("%s\n", candidates[pairs[win_index].winner]);
     return;
+
+    found:
+        printf("%s\n", candidates[pairs[win_index].winner]);
+        return;
+
 }
 
