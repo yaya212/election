@@ -152,7 +152,7 @@ void add_pairs(void)
             }
         }
     }
-    printf("pair_count = %d\n", pair_count);
+    // printf("pair_count = %d\n", pair_count);
 
     // printf("BEFORE SORTING:\n\n");
 
@@ -212,14 +212,15 @@ void sort_pairs(void)
     return;
 }
 
-int p1;
-int p2;
+int p1 = -1;
+int p2 = -1;
 int index = 0;
 int l = 0;
 bool isCyclic(int x, int y)
 {
     if(p2 == y)
     {
+        l = 0;
         return true;
     }
     if(index == 0)
@@ -239,9 +240,13 @@ bool isCyclic(int x, int y)
         l++;
         if(l == candidate_count)
         {
+            //printf("pairs {%d,%d} don't form a cycle\n", y, x);
+            p1 = -1;
+            p2 = -1;
+            l = 0;
             return false;
         }
-        return isCyclic(x, y);
+        return isCyclic(p2, y);
     }
 
 
@@ -262,6 +267,15 @@ void lock_pairs(void)
 
 
     }
+
+    // for(int i = 0; i < candidate_count; i++)
+    // {
+    //     for(int j = 0; j < candidate_count; j++)
+    //     {
+    //         printf("locked[%d][%d] = %d\t", i, j, locked[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 
     /*int flag;
     //locked[pairs[0].winner][pairs[0].loser] = true;
@@ -334,7 +348,7 @@ void print_winner(void)
     for(int i = 0; i < candidate_count; i++)
     {
         win = 1;
-        for(int j = 0; i < candidate_count; j++)
+        for(int j = 0; j < candidate_count; j++)
         {
             if(locked[j][i] == true)
             {
@@ -364,7 +378,7 @@ void print_winner(void)
     return;
 
     found:
-        printf("%s\n", candidates[pairs[win_index].winner]);
+        printf("%s\n", candidates[win_index]);
         return;
 
 }
