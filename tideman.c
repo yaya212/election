@@ -227,6 +227,7 @@ void lock_pairs(void)
                 if(locked[j][pairs[i].winner] == true)
                 {
                     flag = 1;
+                    locked[pairs[i].winner][pairs[i].loser] = false;
                     //printf("The pair %d --> %d form a loop\n", pairs[i].winner, pairs[i].loser);
                     goto outer;
                 }
