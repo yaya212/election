@@ -243,6 +243,7 @@ bool isCyclic(int x, int y)
             //printf("pairs {%d,%d} don't form a cycle\n", y, x);
             p1 = -1;
             p2 = -1;
+            index = 0;
             l = 0;
             return false;
         }
@@ -261,6 +262,7 @@ void lock_pairs(void)
         {
             if(!isCyclic(pairs[i].loser, pairs[i].winner))
             {
+                printf("pairs {%d,%d} don't form a cycle\n", pairs[i].winner, pairs[i].loser);
                 locked[pairs[i].winner][pairs[i].loser] = true;
             }
         }
