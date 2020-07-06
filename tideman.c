@@ -221,6 +221,7 @@ bool isCyclic(int x, int y)
     if(p2 == y)
     {
         l = 0;
+        index = 0;
         return true;
     }
     if(index == 0)
@@ -363,19 +364,6 @@ void print_winner(void)
             win_index = i;
             goto found;
         }
-        // win = 1;
-        // for(int j = 0; j < candidate_count; j++)
-        // {
-        //     if(locked[j][pairs[i].winner] == true)
-        //     {
-        //         win = 0;
-        //         break;
-        //     }
-        // }
-        // if(win == 1)
-        // {
-        //     win_index = i;
-        // }
     }
     return;
 
